@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birds Evolution – Fiche Produit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+
+/* ─────────────────────────────────────────
+   CSS CUSTOM PROPERTIES
+───────────────────────────────────────── */
+:root {
+  --navy:    #0F2750;
+  --navy-m:  #1A3A6B;
+  --navy-l:  #2D528A;
+  --teal:    #0891B2;
+  --teal-l:  #BAE6FD;
+  --teal-d:  #065F82;
+  --green:   #10B981;
+  --green-l: #D1FAE5;
+  --orange:  #F59E0B;
+  --orange-l:#FEF3C7;
+  --purple:  #7C3AED;
+  --purple-l:#EDE9FE;
+  --red:     #EF4444;
+  --white:   #FFFFFF;
+  --off-wt:  #F8FAFC;
+  --bg-l:    #F0F7FF;
+  --gray-l:  #E2E8F0;
+  --dark:    #1E293B;
+  --mid:     #475569;
+  --muted:   #94A3B8;
+  --f: 'Inter', system-ui, sans-serif;
+  --r: 14px;
+  --r-lg: 20px;
+  --sh: 0 24px 64px rgba(15,39,80,.18);
+  --sh-dark: 0 24px 64px rgba(0,0,0,.45);
+  --sh-sm: 0 8px 24px rgba(15,39,80,.12);
+}
+
+/* ─────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────── */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--f);
+  color: var(--dark);
+  background: var(--bg-l);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+img { display: block; max-width: 100%; }
+section { position: relative; overflow: hidden; }
+
+/* ─────────────────────────────────────────
+   NAVIGATION DOTS
+───────────────────────────────────────── */
+#nav-dots {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 7px;
+  background: rgba(255,255,255,.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,.22);
+}
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  cursor: pointer;
+  border: none;
+  transition: all .35s cubic-bezier(.4,0,.2,1);
+  position: relative;
+}
+.dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--navy);
+  color: white;
+  font-size: 11px;
+  font-family: var(--f);
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.dot:hover::after { opacity: 1; }
+.dot:hover { background: rgba(255,255,255,.7); transform: scale(1.6); }
+.dot.active { background: var(--teal); transform: scale(1.4); }
+.dot-dark { background: rgba(15,39,80,.25); }
+.dot-dark:hover { background: var(--navy-m); }
+.dot-dark.active { background: var(--navy); }
+
+/* ─────────────────────────────────────────
+   SCROLL ANIMATIONS
+───────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-up.in { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: .12s !important; }
+.delay-2 { transition-delay: .24s !important; }
+.delay-3 { transition-delay: .36s !important; }
+.delay-4 { transition-delay: .48s !important; }
+.delay-5 { transition-delay: .60s !important; }
+.delay-6 { transition-delay: .72s !important; }
+
+/* ─────────────────────────────────────────
+   SHARED COMPONENTS
+───────────────────────────────────────── */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px;
+  border-radius: 30px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: white;
+}
+.pill-teal   { background: var(--teal); }
+.pill-green  { background: var(--green); }
+.pill-orange { background: var(--orange); }
+.pill-purple { background: var(--purple); }
+.pill-navy   { background: var(--navy); }
+.pill-glass  { background: rgba(8,145,178,.2); color: var(--teal-l); border: 1px solid rgba(8,145,178,.3); }
+
+.section-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: rgba(8,145,178,.1);
+  padding: 5px 13px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.section-tag.on-dark { background: rgba(8,145,178,.18); color: var(--teal-l); }
+
+h1 { font-size: clamp(48px, 7vw, 88px); font-weight: 900; line-height: 1.0; }
+h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; line-height: 1.15; }
+h3 { font-size: clamp(15px, 2vw, 18px); font-weight: 700; line-height: 1.3; }
+
+.feat {
+  display: flex; gap: 14px; align-items: flex-start;
+  margin-bottom: 18px;
+}
+.feat-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 7px;
+}
+.feat h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+.feat p  { font-size: 12.5px; color: var(--mid); line-height: 1.5; }
+.feat.on-dark h4 { color: white; }
+.feat.on-dark p  { color: var(--teal-l); }
+
+.card {
+  background: white;
+  border-radius: var(--r-lg);
+  padding: 24px 28px;
+  box-shadow: var(--sh-sm);
+  border: 1px solid var(--gray-l);
+}
+.card-glass {
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(255,255,255,.15);
+}
+
+/* ─────────────────────────────────────────
+   SCREENSHOT EFFECTS
+───────────────────────────────────────── */
+.screen {
+  border-radius: var(--r);
+  display: block;
+}
+.screen-shadow { box-shadow: var(--sh); }
+.screen-shadow-dark { box-shadow: var(--sh-dark); }
+.screen-border { border: 2px solid rgba(8,145,178,.3); }
+.screen-border-light { border: 2px solid var(--gray-l); }
+.screen-glow { box-shadow: 0 0 0 1px rgba(8,145,178,.3), 0 24px 64px rgba(8,145,178,.25); }
+
+/* Overlapping stack pattern */
+.img-stack {
+  position: relative;
+}
+.img-stack .s-back {
+  position: absolute;
+  opacity: .75;
+  filter: brightness(.85) saturate(.9);
+}
+.img-stack .s-front {
+  position: relative;
+  z-index: 2;
+}
+
+/* Floating stat/info card overlapping screenshot */
+.float-card {
+  position: absolute;
+  z-index: 5;
+  background: white;
+  border-radius: var(--r);
+  padding: 14px 18px;
+  box-shadow: 0 12px 40px rgba(15,39,80,.2);
+  border: 1px solid var(--gray-l);
+}
+.float-card-dark {
+  background: var(--navy-m);
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 12px 40px rgba(0,0,0,.4);
+}
+.float-card .fc-val {
+  font-size: 22px; font-weight: 800; color: var(--teal); margin-bottom: 2px;
+}
+.float-card .fc-lbl {
+  font-size: 11px; font-weight: 600; color: var(--mid); text-transform: uppercase; letter-spacing: .08em;
+}
+.float-card-dark .fc-val { color: var(--teal-l); }
+.float-card-dark .fc-lbl { color: rgba(186,230,253,.6); }
+
+/* ─────────────────────────────────────────
+   DECORATIVE CIRCLES (hero etc)
+───────────────────────────────────────── */
+.deco-circle {
+  position: absolute; border-radius: 50%; pointer-events: none;
+}
+@keyframes drift {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(-20px,25px) scale(1.04); }
+}
+@keyframes drift2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(18px,-18px) scale(.96); }
+}
+@keyframes drift3 {
+  0%,100% { transform: translate(0,0); }
+  50%      { transform: translate(-12px,-22px); }
+}
+.dc-a { animation: drift  12s ease-in-out infinite; }
+.dc-b { animation: drift2 9s  ease-in-out infinite; }
+.dc-c { animation: drift3 15s ease-in-out infinite; }
+
+/* ─────────────────────────────────────────
+   WRAPPER / CONTAINER
+───────────────────────────────────────── */
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 48px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+
+
+/* ══════════════════════════════════════════
+   SECTION 1: HERO
+══════════════════════════════════════════ */
+#hero {
+  background: linear-gradient(145deg, #0a1e3d 0%, var(--navy) 40%, #0e2d5e 80%, #0F2750 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 100px 0 80px;
+}
+.hero-label {
+  position: absolute;
+  top: 36px; right: 52px;
+  background: var(--orange);
+  color: white;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 8px 22px;
+  border-radius: 30px;
+  z-index: 10;
+}
+.hero-title { -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif; color: white; margin-bottom: 8px; }
+.hero-title span { color: var(--teal); display: block; }
+.hero-tagline {
+  font-size: clamp(16px,2vw,21px);
+  color: var(--teal-l);
+  font-style: italic; font-weight: 400;
+  margin: 20px 0 10px;
+}
+.hero-sub {
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 40px;
+}
+.badge-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.badge-row .pill { padding: 10px 22px; font-size: 12px; }
+
+/* Hero animated circles */
+#hero .dc1 { width: 600px; height: 600px; right: -180px; top: -180px;
+  background: radial-gradient(circle, rgba(8,145,178,.14) 0%, transparent 68%); }
+#hero .dc2 { width: 350px; height: 350px; right: 220px; bottom: 60px;
+  background: radial-gradient(circle, rgba(16,185,129,.1) 0%, transparent 70%); }
+#hero .dc3 { width: 200px; height: 200px; left: 40%; bottom: 20px;
+  background: radial-gradient(circle, rgba(124,58,237,.1) 0%, transparent 70%); }
+#hero .dc4 { width: 60px; height: 60px; right: 420px; top: 100px; background: rgba(8,145,178,.2); }
+#hero .dc5 { width: 40px; height: 40px; right: 300px; top: 200px; background: rgba(245,158,11,.2); }
+#hero .dc6 { width: 28px; height: 28px; right: 500px; top: 170px; background: rgba(16,185,129,.25); }
+#hero .dc7 { width: 20px; height: 20px; right: 380px; top: 310px; background: rgba(124,58,237,.3); }
+
+/* ══════════════════════════════════════════
+   SECTION 2: EN BREF
+══════════════════════════════════════════ */
+#bref {
+  background: var(--off-wt);
+  padding: 96px 0;
+}
+.stat-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-bottom: 52px; }
+.stat-card {
+  border-radius: var(--r-lg);
+  padding: 28px 24px 24px;
+  color: white;
+  position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,.07);
+  border-radius: inherit;
+}
+.stat-card .sc-val {
+  font-size: 40px; font-weight: 900; line-height: 1;
+  display: block; margin-bottom: 8px;
+}
+.stat-card .sc-lbl {
+  font-size: 12px; font-weight: 600;
+  opacity: .82; line-height: 1.4;
+}
+.sc-teal   { background: linear-gradient(135deg, var(--teal-d), var(--teal)); }
+.sc-green  { background: linear-gradient(135deg, #059669, var(--green)); }
+.sc-orange { background: linear-gradient(135deg, #d97706, var(--orange)); }
+.sc-purple { background: linear-gradient(135deg, #5b21b6, var(--purple)); }
+
+#bref .grid-2 { gap: 64px; }
+#bref .left h2 { color: var(--navy); margin-bottom: 18px; }
+#bref .left p  { color: var(--mid); font-size: 15px; line-height: 1.75; }
+#bref .left .highlight {
+  margin-top: 22px; padding: 18px 22px;
+  background: rgba(8,145,178,.07);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 var(--r) var(--r) 0;
+  font-size: 14px; font-weight: 600; color: var(--navy);
+}
+
+/* Bref screenshot with float card */
+.bref-img-wrap { position: relative; }
+.bref-img-wrap .main-img {
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+  border: 2px solid var(--gray-l);
+  transform: rotate(-1.5deg);
+}
+.bref-img-wrap .fc1 {
+  bottom: -22px; right: -22px;
+  min-width: 155px;
+}
+.bref-img-wrap .fc2 {
+  top: -18px; left: -18px;
+  min-width: 135px;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 3: TABLEAU DE BORD
+══════════════════════════════════════════ */
+#dashboard {
+  background: linear-gradient(160deg, #0b1f3e 0%, var(--navy) 50%, #0d2a58 100%);
+  padding: 96px 0;
+}
+#dashboard h2 { color: white; }
+#dashboard .sub { color: var(--teal-l); font-size: 15px; margin: 14px 0 40px; }
+
+.dashboard-visual { position: relative; }
+.dashboard-visual .main-img {
+  width: 100%;
+  border-radius: var(--r-lg);
+  border: 2px solid rgba(8,145,178,.4);
+  box-shadow: 0 0 0 1px rgba(8,145,178,.2), var(--sh-dark);
+}
+.dashboard-visual .overlay-img {
+  position: absolute;
+  width: 45%;
+  bottom: -28px;
+  right: -28px;
+  border-radius: var(--r);
+  border: 2px solid rgba(8,145,178,.5);
+  box-shadow: var(--sh-dark);
+  transform: rotate(1.5deg);
+  z-index: 3;
+}
+.dashboard-visual .fc-badge {
+  position: absolute;
+  top: 18px;
+  left: -22px;
+  z-index: 4;
+}
+
+.dash-feats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; margin-top: 48px; }
+
+/* ══════════════════════════════════════════
+   SECTION 4: OISEAUX & IDENTIFICATION
+══════════════════════════════════════════ */
+#oiseaux {
+  background: white;
+  padding: 96px 0;
+}
+#oiseaux h2 { color: var(--navy); }
+#oiseaux .sub { color: var(--mid); font-size: 15px; margin: 14px 0 36px; }
+
+/* Dual overlapping screenshots */
+.dual-screens {
+  position: relative;
+  height: 480px;
+}
+.dual-screens .ds-back {
+  position: absolute;
+  width: 72%;
+  top: 0; left: 0;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+  border: 2px solid var(--gray-l);
+  transform: rotate(-2.5deg);
+  filter: brightness(.9) saturate(.85);
+  z-index: 1;
+}
+.dual-screens .ds-front {
+  position: absolute;
+  width: 72%;
+  bottom: 0; right: 0;
+  border-radius: var(--r-lg);
+  box-shadow: 0 28px 70px rgba(15,39,80,.25);
+  border: 2px solid rgba(8,145,178,.4);
+  z-index: 2;
+}
+.dual-screens .fc-birds {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 5;
+  min-width: 130px;
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 5: ÉLEVAGE – COUPLES & SAISONS
+══════════════════════════════════════════ */
+#elevage {
+  background: linear-gradient(140deg, #0d2a58 0%, #0f2750 50%, #0c2244 100%);
+  padding: 96px 0;
+}
+#elevage h2 { color: white; }
+#elevage .sub { color: var(--teal-l); font-size: 15px; margin: 14px 0 36px; }
+
+.elevage-imgs { position: relative; height: 440px; }
+.elevage-imgs .ei-main {
+  position: absolute;
+  width: 78%;
+  top: 0; right: 0;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-dark);
+  border: 2px solid rgba(8,145,178,.35);
+  z-index: 2;
+}
+.elevage-imgs .ei-small {
+  position: absolute;
+  width: 52%;
+  bottom: 0; left: 0;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-dark);
+  border: 2px solid rgba(16,185,129,.3);
+  transform: rotate(2deg);
+  z-index: 3;
+}
+.elevage-imgs .fc-cons {
+  position: absolute;
+  bottom: 60px;
+  right: -22px;
+  z-index: 5;
+  min-width: 160px;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 6: COUVÉES & ŒUFS
+══════════════════════════════════════════ */
+#couvees {
+  background: var(--bg-l);
+  padding: 96px 0;
+}
+#couvees h2 { color: var(--navy); }
+#couvees .sub { color: var(--mid); font-size: 15px; margin: 14px 0 40px; }
+
+.couvees-imgs { position: relative; height: 360px; }
+.couvees-imgs .ci-main {
+  position: absolute;
+  width: 62%;
+  top: 0; left: 0;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+  border: 2px solid var(--gray-l);
+  z-index: 2;
+}
+.couvees-imgs .ci-sec {
+  position: absolute;
+  width: 56%;
+  bottom: 0; right: 0;
+  border-radius: var(--r-lg);
+  box-shadow: 0 20px 50px rgba(15,39,80,.2);
+  border: 2px solid rgba(8,145,178,.3);
+  transform: rotate(1.8deg);
+  z-index: 3;
+}
+
+.feat-grid-4 {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 18px;
+  margin-top: 52px;
+}
+.feat-mini {
+  background: white;
+  border-radius: var(--r);
+  padding: 22px 20px;
+  border-left: 4px solid;
+  box-shadow: var(--sh-sm);
+}
+.feat-mini .fm-title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+.feat-mini .fm-desc  { font-size: 12px; color: var(--mid); line-height: 1.5; }
+
+/* ══════════════════════════════════════════
+   SECTION 7: CALENDRIER & SANTÉ
+══════════════════════════════════════════ */
+#calsante {
+  background: white;
+  padding: 96px 0;
+}
+.calsante-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+
+.cal-side h3 { color: var(--navy); font-size: 20px; margin-bottom: 22px; }
+.cal-img-wrap { position: relative; margin-bottom: 28px; }
+.cal-img-wrap img {
+  width: 100%;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+  border: 2px solid var(--gray-l);
+}
+.cal-img-wrap .fc-cal {
+  position: absolute;
+  bottom: -18px; right: -18px;
+  z-index: 3;
+  min-width: 145px;
+}
+
+.sante-side h3 { color: var(--navy); font-size: 20px; margin-bottom: 22px; }
+.sante-img-wrap { position: relative; margin-bottom: 28px; }
+.sante-img-wrap img {
+  width: 100%;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+  border: 2px solid var(--gray-l);
+}
+.sante-img-wrap .fc-sante {
+  position: absolute;
+  top: -16px; left: -16px;
+  z-index: 3;
+  min-width: 140px;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 8: BUDGET & FACTURATION
+══════════════════════════════════════════ */
+#budget {
+  background: linear-gradient(150deg, #081e3a 0%, var(--navy) 60%, #0f2750 100%);
+  padding: 96px 0;
+}
+#budget h2 { color: white; }
+#budget .sub { color: var(--teal-l); font-size: 15px; margin: 14px 0 40px; }
+
+.budget-imgs { position: relative; height: 400px; }
+.budget-imgs .bi-main {
+  position: absolute;
+  width: 70%;
+  top: 0; left: 0;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-dark);
+  border: 2px solid rgba(8,145,178,.3);
+  z-index: 2;
+}
+.budget-imgs .bi-sec {
+  position: absolute;
+  width: 56%;
+  bottom: 0; right: 0;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-dark);
+  border: 2px solid rgba(16,185,129,.3);
+  transform: rotate(-1.5deg);
+  z-index: 3;
+}
+.budget-imgs .fc-budget {
+  position: absolute;
+  top: 50%;
+  right: -28px;
+  transform: translateY(-50%);
+  z-index: 5;
+  min-width: 148px;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 9: STATISTIQUES
+══════════════════════════════════════════ */
+#stats {
+  background: var(--bg-l);
+  padding: 96px 0;
+}
+#stats h2 { color: var(--navy); }
+#stats .sub { color: var(--mid); font-size: 15px; margin: 14px 0 44px; }
+
+.stats-imgs {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+  position: relative;
+  margin-bottom: 52px;
+}
+.stats-imgs .si-main {
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+  border: 2px solid var(--gray-l);
+}
+.stats-imgs .si-sec {
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+  border: 2px solid rgba(8,145,178,.25);
+  transform: translateY(16px);
+  align-self: start;
+}
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 18px;
+}
+.kpi-card {
+  background: white;
+  border-radius: var(--r);
+  padding: 20px 22px;
+  box-shadow: var(--sh-sm);
+  border-top: 3px solid;
+}
+.kpi-card .kpi-val {
+  font-size: 26px; font-weight: 800; margin-bottom: 4px;
+}
+.kpi-card .kpi-lbl {
+  font-size: 12px; color: var(--mid); font-weight: 500;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 10: QR CODE & ACCÈS RAPIDE
+══════════════════════════════════════════ */
+#qrcode {
+  background: white;
+  padding: 96px 0;
+}
+#qrcode h2 { color: var(--navy); }
+#qrcode .sub { color: var(--mid); font-size: 15px; margin: 14px 0 48px; }
+
+.qr-gallery {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 0 52px;
+}
+.qr-gallery img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 16px;
+  border: 2px solid var(--gray-l);
+  background: var(--off-wt);
+  box-shadow: var(--sh-sm);
+  padding: 12px;
+  transition: transform .22s cubic-bezier(.4,0,.2,1), box-shadow .22s;
+}
+.qr-gallery img:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: var(--sh);
+}
+
+.qr-imgs {
+  position: relative;
+  height: 380px;
+  margin-bottom: 52px;
+}
+.qr-imgs .qi-main {
+  position: absolute;
+  width: 58%;
+  top: 0; left: 0;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+  border: 2px solid var(--gray-l);
+  z-index: 2;
+}
+.qr-imgs .qi-sec {
+  position: absolute;
+  width: 52%;
+  bottom: 0; right: 0;
+  border-radius: var(--r-lg);
+  box-shadow: 0 24px 60px rgba(15,39,80,.2);
+  border: 2px solid rgba(8,145,178,.4);
+  transform: rotate(1.8deg);
+  z-index: 3;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 12px;
+  position: relative;
+}
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 24px; left: 12%;
+  width: 76%; height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--green), var(--orange), var(--purple));
+  opacity: .35;
+  z-index: 0;
+}
+.step {
+  background: var(--bg-l);
+  border-radius: var(--r);
+  padding: 20px 18px 18px;
+  position: relative; z-index: 1;
+  border: 1px solid var(--gray-l);
+}
+.step-num {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: white;
+  margin-bottom: 14px;
+}
+.step h4 { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+.step p  { font-size: 12px; color: var(--mid); line-height: 1.5; }
+
+/* ══════════════════════════════════════════
+   SECTION 11: CALCULATEUR GÉNÉTIQUE
+══════════════════════════════════════════ */
+#genetique {
+  background: linear-gradient(145deg, #0b2045 0%, var(--navy) 55%, #0d2750 100%);
+  padding: 96px 0;
+}
+#genetique h2 { color: white; }
+
+.gen-layout { display: grid; grid-template-columns: 5fr 4fr; gap: 64px; align-items: start; }
+
+.gen-img-wrap { position: relative; }
+.gen-img-wrap .gi-main {
+  width: 100%;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-dark);
+  border: 2px solid rgba(124,58,237,.4);
+  position: relative; z-index: 2;
+}
+.gen-img-wrap .fc-gen {
+  position: absolute;
+  bottom: -24px; left: -24px;
+  z-index: 5;
+  min-width: 155px;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 12: SYNCHRONISATION & OFFLINE
+══════════════════════════════════════════ */
+#sync {
+  background: linear-gradient(145deg, #061b30 0%, #0a2340 60%, #071a2e 100%);
+  padding: 96px 0;
+}
+#sync h2 { color: white; }
+
+.sync-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.sync-main-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r-lg);
+  padding: 32px 28px;
+}
+.smc-icon {
+  width: 46px; height: 46px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.sync-main-card h3 {
+  color: white;
+  font-size: 18px; font-weight: 700;
+  margin-bottom: 10px;
+}
+.sync-main-card > p {
+  color: rgba(186,230,253,.68);
+  font-size: 13.5px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.smc-list { list-style: none; }
+.smc-list li {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 13px; color: rgba(186,230,253,.75);
+  margin-bottom: 9px; line-height: 1.5;
+}
+.smc-list li::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 6px;
+}
+.smc-teal li::before { background: var(--teal); }
+.smc-green li::before { background: var(--green); }
+
+.sync-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 12: CTA
+══════════════════════════════════════════ */
+#cta {
+  background: linear-gradient(145deg, #08172e 0%, var(--navy) 45%, #0a1e3d 100%);
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 96px 0;
+  text-align: center;
+}
+#cta h2 { color: white; max-width: 680px; margin: 0 auto 16px; }
+#cta .cta-sub { color: var(--teal-l); font-size: 18px; font-style: italic; margin-bottom: 52px; }
+.cta-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; max-width: 980px; margin: 0 auto 52px; }
+.cta-card {
+  border-radius: var(--r-lg);
+  padding: 24px 18px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  transition: transform .3s, background .3s;
+}
+.cta-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.1); }
+.cta-card .cc-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 18px;
+}
+.cta-card h4 { font-size: 12px; font-weight: 700; color: white; margin-bottom: 6px; letter-spacing: .05em; text-transform: uppercase; }
+.cta-card p  { font-size: 12px; color: rgba(186,230,253,.65); line-height: 1.5; }
+
+.cta-btn {
+  display: inline-block;
+  background: var(--teal);
+  color: white;
+  font-size: 17px; font-weight: 700;
+  padding: 18px 48px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform .25s, box-shadow .25s, background .25s;
+  box-shadow: 0 8px 30px rgba(8,145,178,.45);
+  margin-bottom: 20px;
+}
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(8,145,178,.6);
+  background: #0aa1c8;
+}
+.cta-compat { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+.cta-version { color: rgba(148,163,184,.5); font-size: 12px; }
+
+/* ─────────────────────────────────────────
+   FOOTER LINE
+───────────────────────────────────────── */
+.section-footer {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--teal), var(--green));
+}
+
+/* ─────────────────────────────────────────
+   UTILITY
+───────────────────────────────────────── */
+.text-teal   { color: var(--teal); }
+.text-green  { color: var(--green); }
+.text-orange { color: var(--orange); }
+.text-purple { color: var(--purple); }
+.text-navy   { color: var(--navy); }
+.mt-4  { margin-top: 4px; }
+.mt-8  { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-20 { margin-top: 20px; }
+.mt-28 { margin-top: 28px; }
+
+
+/* ─────────────────────────────────────────
+   LIGHTBOX
+───────────────────────────────────────── */
+img.screen { cursor: zoom-in; }
+
+#lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 20, 40, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: lb-fade-in .22s ease;
+}
+#lightbox-overlay.open { display: flex; }
+
+@keyframes lb-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#lightbox-img {
+  max-width: 92vw;
+  max-height: 88vh;
+  border-radius: 12px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.65);
+  animation: lb-zoom-in .22s cubic-bezier(.4,0,.2,1);
+  object-fit: contain;
+}
+
+@keyframes lb-zoom-in {
+  from { transform: scale(.94); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+#lightbox-close {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .18s;
+  backdrop-filter: blur(4px);
+}
+#lightbox-close:hover { background: rgba(255,255,255,.28); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV DOTS (fixed right)
+══════════════════════════════════════ -->
+<nav id="nav-dots" aria-label="Navigation sections">
+  <button class="dot" data-target="hero"      data-label="Accueil"></button>
+  <button class="dot" data-target="bref"      data-label="En bref"></button>
+  <button class="dot" data-target="dashboard" data-label="Tableau de bord"></button>
+  <button class="dot" data-target="oiseaux"   data-label="Oiseaux"></button>
+  <button class="dot" data-target="elevage"   data-label="Élevage"></button>
+  <button class="dot" data-target="couvees"   data-label="Couvées"></button>
+  <button class="dot" data-target="calsante"  data-label="Calendrier &amp; Santé"></button>
+  <button class="dot" data-target="budget"    data-label="Budget"></button>
+  <button class="dot" data-target="stats"     data-label="Statistiques"></button>
+  <button class="dot" data-target="qrcode"    data-label="QR Code"></button>
+  <button class="dot" data-target="genetique"  data-label="Génétique"></button>
+  <button class="dot" data-target="sync"      data-label="Synchronisation"></button>
+  <button class="dot" data-target="cta"       data-label="Télécharger"></button>
+</nav>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 1: HERO
+══════════════════════════════════════ -->
+<section id="hero">
+  <!-- Decorative animated circles -->
+  <div class="deco-circle dc-a" style="width:600px;height:600px;right:-160px;top:-160px;background:radial-gradient(circle,rgba(8,145,178,.14) 0%,transparent 68%)"></div>
+  <div class="deco-circle dc-b" style="width:380px;height:380px;right:240px;bottom:40px;background:radial-gradient(circle,rgba(16,185,129,.1) 0%,transparent 70%)"></div>
+  <div class="deco-circle dc-c" style="width:220px;height:220px;left:42%;bottom:30px;background:radial-gradient(circle,rgba(124,58,237,.1) 0%,transparent 70%)"></div>
+  <div class="deco-circle" style="width:54px;height:54px;right:420px;top:100px;background:rgba(8,145,178,.22);animation:drift 10s ease-in-out infinite"></div>
+  <div class="deco-circle" style="width:36px;height:36px;right:310px;top:200px;background:rgba(245,158,11,.22);animation:drift2 8s ease-in-out infinite"></div>
+  <div class="deco-circle" style="width:24px;height:24px;right:520px;top:175px;background:rgba(16,185,129,.28);animation:drift3 14s ease-in-out infinite"></div>
+  <div class="deco-circle" style="width:18px;height:18px;right:380px;top:330px;background:rgba(124,58,237,.32);animation:drift 9s ease-in-out infinite 2s"></div>
+
+  <span class="hero-label">Fiche Produit</span>
+
+  <div class="wrap">
+    <div class="fade-up">
+      <div class="section-tag on-dark">Application de gestion d'élevage</div>
+      <h1 class="hero-title">
+        Birds<span>Evolution</span>
+      </h1>
+      <p class="hero-tagline">L'outil de référence pour les passionnés d'oiseaux exotiques</p>
+      <p class="hero-sub">Canaris · Perruches ondulées · Calopsittes · Inséparables · Perruches à collier · et bien plus</p>
+      <div class="badge-row">
+        <span class="pill pill-teal">Offline-First</span>
+        <span class="pill pill-green">Multi-appareils</span>
+        <span class="pill pill-orange">+15 ans d'expérience</span>
+        <span class="pill pill-purple">Communauté active</span>
+        <span class="pill" style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)">Windows · Mac · Linux · Android · iOS</span>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 2: EN BREF
+══════════════════════════════════════ -->
+<section id="bref">
+  <div class="wrap">
+    <div class="fade-up">
+      <div class="section-tag">L'essentiel en un coup d'œil</div>
+    </div>
+    <div class="stat-cards fade-up delay-1">
+      <div class="stat-card sc-navy" style="background:linear-gradient(135deg,#1a3a6b,#0f2750)">
+        <span class="sc-val">+15 ans</span>
+        <span class="sc-lbl">D'expérience &amp; d'évolution continue</span>
+      </div>
+      <div class="stat-card sc-teal">
+        <span class="sc-val">Offline</span>
+        <span class="sc-lbl">Fonctionne intégralement sans internet</span>
+      </div>
+      <div class="stat-card sc-green">
+        <span class="sc-val">Sync</span>
+        <span class="sc-lbl">Multi-appareils pour un seul utilisateur</span>
+      </div>
+      <div class="stat-card sc-orange">
+        <span class="sc-val">100%</span>
+        <span class="sc-lbl">Vos données, toujours disponibles</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="left">
+        <h2 class="fade-up delay-2">L'outil pensé PAR des éleveurs,<br>POUR des éleveurs</h2>
+        <p class="fade-up delay-3" style="margin-top:16px">
+          Birds Evolution vous accompagne à chaque étape de vos saisons d'élevage : gestion complète de vos oiseaux, suivi des couples, traçage oeuf par oeuf, calendrier automatique des dates clés, suivi santé, budget et statistiques avancées.
+        </p>
+        <p class="fade-up delay-4" style="margin-top:12px">
+          Disponible sur toutes les plateformes, l'application s'adapte à votre routine — que vous soyez devant votre ordinateur ou en balade dans votre volière avec votre smartphone.
+        </p>
+        <div class="highlight fade-up delay-5">
+          Approche <strong>Offline-First</strong> unique : vos données sont disponibles en permanence, sans connexion internet, et synchronisables entre vos appareils via votre compte.
+        </div>
+      </div>
+
+      <div class="bref-img-wrap fade-up delay-3">
+        <img class="main-img screen" src="Screenshot 2026-03-23 at 14.52.48.png" alt="Tableau de bord Birds Evolution">
+        <div class="float-card fc1">
+          <div class="fc-val">521</div>
+          <div class="fc-lbl">Oeufs suivis</div>
+        </div>
+        <div class="float-card fc2">
+          <div class="fc-val">50</div>
+          <div class="fc-lbl">Couples actifs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 3: TABLEAU DE BORD
+══════════════════════════════════════ -->
+<section id="dashboard">
+  <div class="deco-circle dc-a" style="width:500px;height:500px;left:-180px;bottom:-100px;background:radial-gradient(circle,rgba(8,145,178,.1) 0%,transparent 70%)"></div>
+
+  <div class="wrap">
+    <div class="fade-up">
+      <div class="section-tag on-dark">Vue d'ensemble</div>
+      <h2>Tableau de bord intelligent</h2>
+      <p class="sub">Toutes vos données essentielles d'un seul coup d'œil</p>
+    </div>
+
+    <div class="grid-2" style="gap:64px;align-items:start">
+      <div>
+        <div class="dashboard-visual fade-up delay-2">
+          <img class="main-img screen" src="Screenshot 2026-03-23 at 14.52.48.png" alt="Dashboard">
+          <img class="overlay-img screen" src="Screenshot 2026-03-23 at 14.52.54.png" alt="Événements à venir">
+          <div class="float-card float-card-dark fc-badge">
+            <div class="fc-val">⚡ Urgent</div>
+            <div class="fc-lbl">Alertes sur les événements clés</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="dash-feats">
+          <div class="feat on-dark fade-up delay-1">
+            <div class="feat-dot" style="background:var(--teal)"></div>
+            <div><h4>Effectif en temps réel</h4><p>Mâles, femelles, jeunes – statuts Vendu, À vendre</p></div>
+          </div>
+          <div class="feat on-dark fade-up delay-2">
+            <div class="feat-dot" style="background:var(--green)"></div>
+            <div><h4>Aperçu du budget</h4><p>Revenus, dépenses et solde net de la saison</p></div>
+          </div>
+          <div class="feat on-dark fade-up delay-2">
+            <div class="feat-dot" style="background:var(--orange)"></div>
+            <div><h4>Événements à venir</h4><p>Alertes urgentes : fertilité, éclosion, baguage</p></div>
+          </div>
+          <div class="feat on-dark fade-up delay-3">
+            <div class="feat-dot" style="background:var(--teal)"></div>
+            <div><h4>Résumé élevage</h4><p>Couples actifs, couvées en cours, oeufs suivis</p></div>
+          </div>
+          <div class="feat on-dark fade-up delay-3">
+            <div class="feat-dot" style="background:var(--purple)"></div>
+            <div><h4>Statistiques de saison</h4><p>Graphique de tendance mensuelle des revenus</p></div>
+          </div>
+          <div class="feat on-dark fade-up delay-4">
+            <div class="feat-dot" style="background:var(--green)"></div>
+            <div><h4>Synchronisation cloud</h4><p>Bouton de sync visible pour mise à jour instantanée</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 4: OISEAUX & IDENTIFICATION
+══════════════════════════════════════ -->
+<section id="oiseaux">
+  <div class="wrap">
+    <div class="grid-2" style="gap:72px">
+      <div>
+        <div class="fade-up">
+          <div class="section-tag">Gestion individuelle</div>
+          <h2 style="color:var(--navy)">Oiseaux &amp; Identification</h2>
+          <p class="sub" style="color:var(--mid);font-size:15px;margin:14px 0 32px">Chaque oiseau traçable, de l'éclosion à la cession</p>
+        </div>
+
+        <div class="feat fade-up delay-1">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Identifiant unique standardisé ou personnalisé</h4><p>Format configurable : Pays / Éleveur / Année / Numéro / Taille / Couleur</p></div>
+        </div>
+        <div class="feat fade-up delay-2">
+          <div class="feat-dot" style="background:var(--purple)"></div>
+          <div><h4>Mutations génétiques</h4><p>Enregistrez les mutations de chaque oiseau pour le calculateur génétique</p></div>
+        </div>
+        <div class="feat fade-up delay-2">
+          <div class="feat-dot" style="background:var(--orange)"></div>
+          <div><h4>Journal &amp; mémos datés</h4><p>Historique complet des événements, notes et traitements par oiseau</p></div>
+        </div>
+        <div class="feat fade-up delay-3">
+          <div class="feat-dot" style="background:var(--green)"></div>
+          <div><h4>Généalogie &amp; Pedigree imprimable</h4><p>Arbre généalogique, ancêtres, descendants, frères &amp; sœurs, consanguinité</p></div>
+        </div>
+        <div class="feat fade-up delay-3">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Photos &amp; fichiers attachés</h4><p>Photos et documents associés à chaque fiche oiseau</p></div>
+        </div>
+        <div class="feat fade-up delay-4">
+          <div class="feat-dot" style="background:var(--navy)"></div>
+          <div><h4>Filtres avancés</h4><p>Filtrez par espèce, cage, saison, statut, mutation, date d'éclosion…</p></div>
+        </div>
+      </div>
+
+      <div class="dual-screens fade-up delay-2">
+        <img class="ds-back screen" src="Screenshot 2026-03-23 at 14.53.38.png" alt="Liste des oiseaux">
+        <img class="ds-front screen" src="Screenshot 2026-03-23 at 14.54.21.png" alt="Fiche individuelle">
+        <div class="float-card fc-birds">
+          <div class="fc-val">87</div>
+          <div class="fc-lbl">Oiseaux présents</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 5: ÉLEVAGE – COUPLES & SAISONS
+══════════════════════════════════════ -->
+<section id="elevage">
+  <div class="deco-circle dc-b" style="width:450px;height:450px;right:-120px;top:-80px;background:radial-gradient(circle,rgba(8,145,178,.12) 0%,transparent 70%)"></div>
+
+  <div class="wrap">
+    <div class="grid-2" style="gap:72px">
+      <div>
+        <div class="elevage-imgs fade-up delay-2">
+          <img class="ei-main screen" src="Screenshot 2026-03-23 at 14.55.36.png" alt="Gestion des couples">
+          <img class="ei-small screen" src="Screenshot 2026-03-23 at 14.56.37.png" alt="Comparaison saisons">
+          <div class="float-card float-card-dark fc-cons">
+            <div class="fc-val">14.07%</div>
+            <div class="fc-lbl">Consanguinité calculée</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="fade-up">
+          <div class="section-tag on-dark">Reproducteurs</div>
+          <h2 style="color:white">Couples &amp; Saisons d'élevage</h2>
+          <p class="sub">Organisez vos reproducteurs, suivez les performances saison après saison</p>
+        </div>
+
+        <div class="feat on-dark fade-up delay-1">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Couples par saison</h4><p>Associez mâle et femelle pour chaque saison d'élevage</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-2">
+          <div class="feat-dot" style="background:var(--orange)"></div>
+          <div><h4>Alertes de fertilité</h4><p>Rappels automatiques pour vérifier la fertilité des œufs</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-2">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Prochaine vérification</h4><p>Date affichée clairement pour chaque couple en élevage</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-3">
+          <div class="feat-dot" style="background:var(--purple)"></div>
+          <div><h4>Calculateur de consanguinité</h4><p>Pourcentage d'inbreeding calculé avec ancêtres communs détaillés</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-4">
+          <div class="feat-dot" style="background:var(--green)"></div>
+          <div><h4>Comparaison inter-saisons</h4><p>Couples, couvées, éclos, vendus – avec indicateurs de tendance (%)</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 6: COUVÉES & TRAÇAGE DES ŒUFS
+══════════════════════════════════════ -->
+<section id="couvees">
+  <div class="wrap">
+    <div class="fade-up" style="max-width:620px">
+      <div class="section-tag">Traçabilité complète</div>
+      <h2 style="color:var(--navy)">Couvées &amp; Traçage des oeufs</h2>
+      <p class="sub" style="color:var(--mid);font-size:15px;margin:14px 0 40px">Suivez chaque oeuf individuellement, de la ponte à l'éclosion</p>
+    </div>
+
+    <div class="grid-2" style="gap:64px;align-items:center;margin-bottom:52px">
+      <div class="couvees-imgs fade-up delay-1" style="height:340px">
+        <img class="ci-main screen" src="Screenshot 2026-03-23 at 14.55.59.png" alt="Liste des couvées">
+        <img class="ci-sec screen" src="Screenshot 2026-03-23 at 14.56.05.png" alt="Détail couvée">
+      </div>
+      <div>
+        <div class="feat fade-up delay-1">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Suivi oeuf par oeuf</h4><p>Statut précis : Vide · Fécondé · Embryon mort · Cassé · Manquant · Abandonné · Éclos</p></div>
+        </div>
+        <div class="feat fade-up delay-2">
+          <div class="feat-dot" style="background:var(--green)"></div>
+          <div><h4>Dates calculées automatiquement</h4><p>Date d'éclosion estimée selon la durée d'incubation de l'espèce</p></div>
+        </div>
+        <div class="feat fade-up delay-3">
+          <div class="feat-dot" style="background:var(--orange)"></div>
+          <div><h4>Identification dès l'éclosion</h4><p>Attribuez directement le jeune éclos à un oiseau de votre effectif</p></div>
+        </div>
+        <div class="feat fade-up delay-4">
+          <div class="feat-dot" style="background:var(--purple)"></div>
+          <div><h4>Historique complet</h4><p>139+ couvées, 521 oeufs suivis sur une saison d'exemple</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feat-grid-4 fade-up delay-2">
+      <div class="feat-mini" style="border-color:var(--teal)">
+        <div class="fm-title">Vide</div>
+        <div class="fm-desc">Oeuf non fécondé, statut détecté à la vérification</div>
+      </div>
+      <div class="feat-mini" style="border-color:var(--green)">
+        <div class="fm-title">Fécondé / Éclos</div>
+        <div class="fm-desc">Suivi de l'évolution jusqu'à l'éclosion du jeune</div>
+      </div>
+      <div class="feat-mini" style="border-color:var(--orange)">
+        <div class="fm-title">Embryon mort</div>
+        <div class="fm-desc">Détection et archivage des échecs de développement</div>
+      </div>
+      <div class="feat-mini" style="border-color:var(--purple)">
+        <div class="fm-title">Manquant / Cassé</div>
+        <div class="fm-desc">Tous les cas de figure documentés avec leur date</div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 7: CALENDRIER & SANTÉ
+══════════════════════════════════════ -->
+<section id="calsante">
+  <div class="wrap">
+    <div class="fade-up" style="margin-bottom:48px">
+      <div class="section-tag">Suivi proactif</div>
+      <h2 style="color:var(--navy)">Calendrier &amp; Santé</h2>
+      <p style="color:var(--mid);font-size:15px;margin-top:12px">Ne manquez plus aucune date · Gérez la santé de votre cheptel</p>
+    </div>
+
+    <div class="calsante-grid">
+      <!-- CALENDRIER -->
+      <div class="fade-up delay-1">
+        <h3>Rappels automatiques</h3>
+        <div class="cal-img-wrap">
+          <img src="Screenshot 2026-03-23 at 14.52.54.png" alt="Calendrier événements" class="screen screen-border-light">
+          <div class="float-card fc-cal">
+            <div class="fc-val" style="color:var(--orange)">⚡ Urgent</div>
+            <div class="fc-lbl">Fertilité à vérifier</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-dot" style="background:var(--orange)"></div>
+          <div><h4>Contrôle de fertilité</h4><p>X jours après la ponte (configurable par espèce)</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Date d'éclosion estimée</h4><p>Calculée selon la durée d'incubation de l'espèce</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-dot" style="background:var(--green)"></div>
+          <div><h4>Baguage &amp; Sevrage</h4><p>Alertes adaptées à chaque espèce configurée</p></div>
+        </div>
+      </div>
+
+      <!-- SANTÉ -->
+      <div class="fade-up delay-2">
+        <h3>Suivi sanitaire</h3>
+        <div class="sante-img-wrap">
+          <img src="Screenshot 2026-03-23 at 14.54.47.png" alt="Traitement de santé" class="screen screen-border-light">
+          <div class="float-card fc-sante">
+            <div class="fc-val" style="color:var(--green)">Santé</div>
+            <div class="fc-lbl">Traitements enregistrés</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-dot" style="background:var(--green)"></div>
+          <div><h4>Traitements individuels ou collectifs</h4><p>Un oiseau ou tout le cheptel, avec produits et doses</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-dot" style="background:var(--red)"></div>
+          <div><h4>Types de problèmes de santé</h4><p>Maladie, parasite, prévention, blessure…</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-dot" style="background:var(--purple)"></div>
+          <div><h4>Étiquettes comportementales</h4><p>Agressif, mauvais parent, à ne pas vendre</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 8: BUDGET & FACTURATION
+══════════════════════════════════════ -->
+<section id="budget">
+  <div class="deco-circle dc-c" style="width:400px;height:400px;right:-80px;bottom:-80px;background:radial-gradient(circle,rgba(16,185,129,.1) 0%,transparent 70%)"></div>
+
+  <div class="wrap">
+    <div class="grid-2" style="gap:72px">
+      <div class="budget-imgs fade-up delay-1" style="height:380px">
+        <img class="bi-main screen" src="Screenshot 2026-03-23 at 14.56.49.png" alt="Graphique budget">
+        <img class="bi-sec screen" src="Screenshot 2026-03-23 at 14.57.08.png" alt="Facture">
+        <div class="float-card float-card-dark fc-budget">
+          <div class="fc-val" style="color:var(--green)">+2 572€</div>
+          <div class="fc-lbl">Solde net saison</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="fade-up">
+          <div class="section-tag on-dark">Gestion financière</div>
+          <h2 style="color:white">Budget &amp; Facturation</h2>
+          <p class="sub">Maîtrisez vos revenus et dépenses, saison après saison</p>
+        </div>
+
+        <div class="feat on-dark fade-up delay-1">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Graphique revenus / dépenses</h4><p>Visualisez la tendance mensuelle et le solde net en temps réel</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-2">
+          <div class="feat-dot" style="background:var(--green)"></div>
+          <div><h4>Factures</h4><p>Créez des factures liées directement aux oiseaux ou œufs vendus</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-2">
+          <div class="feat-dot" style="background:var(--orange)"></div>
+          <div><h4>Dépenses récurrentes</h4><p>Graines, soins, matériel – catégorisez et archivez</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-3">
+          <div class="feat-dot" style="background:var(--purple)"></div>
+          <div><h4>Certificats de cession conformes</h4><p>Attestation de cession d'animaux non domestiques pré remplis et imprimables</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-4">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Comparaison inter-saisons</h4><p>Revenus, dépenses et solde comparés d'une année à l'autre</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 9: STATISTIQUES & ANALYSES
+══════════════════════════════════════ -->
+<section id="stats">
+  <div class="wrap">
+    <div class="fade-up" style="max-width:540px">
+      <div class="section-tag">Analyses</div>
+      <h2 style="color:var(--navy)">Statistiques &amp; Analyses</h2>
+      <p class="sub" style="color:var(--mid);font-size:15px;margin:14px 0 40px">Comprenez l'évolution de votre cheptel en un coup d'œil</p>
+    </div>
+
+    <div class="stats-imgs fade-up delay-1">
+      <img class="si-main screen screen-border-light" src="Screenshot 2026-03-23 at 14.53.07.png" alt="Population dans le temps">
+      <img class="si-sec screen" style="border:2px solid rgba(8,145,178,.3)" src="Screenshot 2026-03-23 at 14.53.12.png" alt="Oeufs par période">
+    </div>
+
+    <div class="kpi-row fade-up delay-2">
+      <div class="kpi-card" style="border-color:var(--teal)">
+        <div class="kpi-val text-teal">Population</div>
+        <div class="kpi-lbl">Évolution mensuelle du cheptel avec naissances, achats, ventes, décès</div>
+      </div>
+      <div class="kpi-card" style="border-color:var(--green)">
+        <div class="kpi-val text-green">Oeufs / période</div>
+        <div class="kpi-lbl">Activité de ponte et d'éclosion mois par mois sur toute l'année</div>
+      </div>
+      <div class="kpi-card" style="border-color:var(--orange)">
+        <div class="kpi-val text-orange">Saisons</div>
+        <div class="kpi-lbl">Comparaison automatique des chiffres clés avec indicateurs de tendance</div>
+      </div>
+      <div class="kpi-card" style="border-color:var(--purple)">
+        <div class="kpi-val text-purple">Multi-espèces</div>
+        <div class="kpi-lbl">Analysez les performances par espèce pour optimiser vos reproductions</div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 10: QR CODE & ACCÈS RAPIDE
+══════════════════════════════════════ -->
+<section id="qrcode">
+  <div class="wrap">
+    <div class="fade-up" style="max-width:600px;margin-bottom:8px">
+      <div class="section-tag">Accès instantané</div>
+      <h2 style="color:var(--navy)">QR Code &amp; Accès rapide</h2>
+      <p class="sub" style="color:var(--mid);font-size:15px;margin:14px 0 0">Un scan depuis la cage → accès direct à la fiche de l'oiseau</p>
+    </div>
+
+    <div class="grid-2" style="gap:72px;align-items:center;margin:40px 0 52px">
+      <div class="qr-imgs fade-up delay-1" style="height:340px">
+        <img class="qi-main screen" src="Screenshot 2026-03-23 at 15.00.40.png" alt="Scan QR codes">
+        <img class="qi-sec screen" src="Screenshot 2026-03-23 at 15.01.02.png" alt="Résultat QR">
+      </div>
+      <div>
+        <div class="feat fade-up delay-1">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Impression des étiquettes QR</h4><p>Générez et imprimez les QR codes directement depuis la fiche oiseau</p></div>
+        </div>
+        <div class="feat fade-up delay-2">
+          <div class="feat-dot" style="background:var(--green)"></div>
+          <div><h4>Scan multi-codes</h4><p>Scannez plusieurs QR codes à la fois en un seul passage dans la volière</p></div>
+        </div>
+        <div class="feat fade-up delay-3">
+          <div class="feat-dot" style="background:var(--orange)"></div>
+          <div><h4>Accès à l'élevage ou aux couvées</h4><p>En un clic depuis le résultat du scan, consultez ou modifiez directement</p></div>
+        </div>
+        <div class="feat fade-up delay-4">
+          <div class="feat-dot" style="background:var(--purple)"></div>
+          <div><h4>Lecture automatique</h4><p>Option de scan continu pour traiter plusieurs cages rapidement</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qr-gallery fade-up delay-2">
+      <img class="screen" src="qrcode-1.png" alt="QR Code exemple 1">
+      <img class="screen" src="qrcode-2.jpg" alt="QR Code exemple 2">
+      <img class="screen" src="qrcode-3.jpg" alt="QR Code exemple 3">
+    </div>
+
+    <div class="steps fade-up delay-2">
+      <div class="step">
+        <div class="step-num" style="background:var(--teal)">1</div>
+        <h4>Imprimez les QR codes</h4>
+        <p>Depuis la fiche de chaque oiseau ou en masse</p>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--green)">2</div>
+        <h4>Collez sur les cages</h4>
+        <p>Sur l'étiquette bague, la cage ou le nichoir</p>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--orange)">3</div>
+        <h4>Scannez avec l'app</h4>
+        <p>Ouverture instantanée dans Birds Evolution</p>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--purple)">4</div>
+        <h4>Accédez en 1 clic</h4>
+        <p>Élevage, couvées, journal de l'oiseau scanné</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 11: CALCULATEUR GÉNÉTIQUE
+══════════════════════════════════════ -->
+<section id="genetique">
+  <div class="deco-circle dc-a" style="width:420px;height:420px;left:-110px;top:50%;transform:translateY(-50%);background:radial-gradient(circle,rgba(124,58,237,.12) 0%,transparent 70%)"></div>
+  <div class="deco-circle" style="width:260px;height:260px;right:-60px;bottom:60px;background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 70%)"></div>
+
+  <div class="wrap">
+    <div class="fade-up" style="max-width:580px">
+      <div class="section-tag on-dark" style="background:rgba(124,58,237,.18);color:#c4b5fd">Génétique avancée</div>
+      <h2 style="color:white">Calculateur génétique</h2>
+      <p style="color:var(--teal-l);font-size:15px;margin:14px 0 48px">Prédisez les mutations des jeunes avant même la ponte, pour chaque couple</p>
+    </div>
+
+    <div class="gen-layout">
+      <div class="gen-img-wrap fade-up delay-1">
+        <img class="gi-main screen" src="Screenshot 2026-03-23 at 14.59.20.png" alt="Calculateur génétique">
+        <div class="float-card float-card-dark fc-gen">
+          <div class="fc-val" style="color:#c4b5fd">Vérifiez rapidement le potentiel de vos couples</div>
+          <div class="fc-lbl">Probabilité calculée donnée en pourcentage par male/femelle</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="feat on-dark fade-up delay-2">
+          <div class="feat-dot" style="background:var(--purple)"></div>
+          <div><h4>Probabilités par sexe</h4><p>Entrez les mutations du mâle et de la femelle — résultats affichés séparément pour les jeunes mâles et femelles</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-3">
+          <div class="feat-dot" style="background:var(--teal)"></div>
+          <div><h4>Tous types génétiques supportés</h4><p>Dominante, Récessive autosomale, Liée au sexe, Co-dominante et leurs combinaisons</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-4">
+          <div class="feat-dot" style="background:var(--orange)"></div>
+          <div><h4>Mutations configurables par espèce</h4><p>Importez depuis la base intégrée ou créez vos propres mutations selon vos souches</p></div>
+        </div>
+        <div class="feat on-dark fade-up delay-4">
+          <div class="feat-dot" style="background:var(--green)"></div>
+          <div><h4>Adapté à toutes vos espèces</h4><p>Incubation, baguage, sevrage — chaque paramètre est entièrement configurable</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 12: SYNCHRONISATION & OFFLINE
+══════════════════════════════════════ -->
+<section id="sync">
+  <div class="deco-circle" style="width:520px;height:520px;right:-140px;top:-100px;background:radial-gradient(circle,rgba(16,185,129,.07) 0%,transparent 70%)"></div>
+  <div class="deco-circle" style="width:300px;height:300px;left:-80px;bottom:0;background:radial-gradient(circle,rgba(8,145,178,.07) 0%,transparent 70%)"></div>
+
+  <div class="wrap">
+    <div class="fade-up" style="max-width:600px">
+      <div class="section-tag on-dark" style="background:rgba(16,185,129,.15);color:rgba(167,243,208,.9)">Données &amp; Connectivité</div>
+      <h2 style="color:white">Synchronisation &amp; Offline</h2>
+      <p style="color:rgba(167,243,208,.8);font-size:15px;margin:14px 0 48px">Vos données accessibles partout, même sans connexion internet</p>
+    </div>
+
+    <div class="sync-main-grid fade-up delay-1">
+      <div class="sync-main-card" style="border-color:rgba(8,145,178,.25)">
+        <div class="smc-icon" style="background:rgba(8,145,178,.15)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--teal)"><path d="M18.36 6.64A9 9 0 0 1 20.77 15"/><path d="M6.16 6.16a9 9 0 1 0 12.68 12.68"/><path d="M12 2v4"/><path d="m2 2 20 20"/></svg>
+        </div>
+        <h3>Offline-First</h3>
+        <p>Birds Evolution fonctionne sans connexion internet. Toutes vos données sont stockées localement sur votre appareil.</p>
+        <ul class="smc-list smc-teal">
+          <li>Disponible sans connexion internet</li>
+          <li>Toutes les fonctions accessibles</li>
+          <li>Idéal en zone rurale ou en déplacement</li>
+          <li>Aucune perte de données en cas de coupure</li>
+        </ul>
+      </div>
+
+      <div class="sync-main-card" style="border-color:rgba(16,185,129,.25)">
+        <div class="smc-icon" style="background:rgba(16,185,129,.15)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green)"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </div>
+        <h3>Synchronisation Cloud</h3>
+        <p>Un compte gratuit suffit pour synchroniser vos données en temps réel sur tous vos appareils.</p>
+        <ul class="smc-list smc-green">
+          <li>Téléphone, tablette et ordinateur</li>
+          <li>Données sauvegardées en sécurité</li>
+          <li>Compte gratuit pour synchroniser</li>
+          <li>Fonctions avancées déverrouillées</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sync-sub-grid fade-up delay-2">
+      <div class="card-glass" style="padding:26px 28px">
+        <h4 style="color:var(--orange);font-size:13px;margin-bottom:10px">Espèces &amp; Mutations configurables</h4>
+        <p style="color:rgba(186,230,253,.7);font-size:13px;line-height:1.65">
+          Importez les espèces directement depuis la base de données intégrée. Configurez vos propres mutations, paramètres d'incubation, de baguage, de sevrage — Birds Evolution s'adapte à toutes vos espèces.
+        </p>
+      </div>
+      <div class="card-glass" style="padding:26px 28px">
+        <h4 style="color:var(--teal-l);font-size:13px;margin-bottom:10px">Sauvegarde locale &amp; restauration</h4>
+        <p style="color:rgba(186,230,253,.7);font-size:13px;line-height:1.65">
+          Téléchargez une copie locale de votre base de données à tout moment. Restaurez en cas de besoin. Vos données vous appartiennent.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 12: CTA
+══════════════════════════════════════ -->
+<section id="cta">
+  <div class="deco-circle dc-a" style="width:700px;height:700px;right:-200px;top:-200px;background:radial-gradient(circle,rgba(8,145,178,.1) 0%,transparent 65%)"></div>
+  <div class="deco-circle dc-b" style="width:400px;height:400px;left:-100px;bottom:-80px;background:radial-gradient(circle,rgba(16,185,129,.08) 0%,transparent 70%)"></div>
+  <div class="deco-circle" style="width:50px;height:50px;right:400px;top:120px;background:rgba(8,145,178,.2);animation:drift 11s ease-in-out infinite"></div>
+  <div class="deco-circle" style="width:32px;height:32px;right:280px;top:240px;background:rgba(245,158,11,.22);animation:drift2 9s ease-in-out infinite"></div>
+  <div class="deco-circle" style="width:22px;height:22px;right:480px;top:200px;background:rgba(16,185,129,.25);animation:drift3 13s ease-in-out infinite"></div>
+
+  <div class="wrap" style="width:100%">
+    <div class="section-tag on-dark fade-up" style="margin:0 auto 16px;display:block;text-align:center;width:fit-content">Rejoignez la communauté</div>
+    <h2 class="fade-up delay-1">Rejoignez des centaines d'éleveurs<br>qui font confiance à Birds Evolution</h2>
+    <p class="cta-sub fade-up delay-2">depuis plus de 15 ans, l'application évolue grâce à vous</p>
+
+    <div class="cta-cards fade-up delay-2">
+      <div class="cta-card">
+        <div class="cc-icon" style="background:rgba(8,145,178,.2)">🌐</div>
+        <h4>100% Offline</h4>
+        <p>Vos données, toujours disponibles, sans internet</p>
+      </div>
+      <div class="cta-card">
+        <div class="cc-icon" style="background:rgba(16,185,129,.2)">🆓</div>
+        <h4>Gratuit pour démarrer</h4>
+        <p>Testez sans engagement, créez un compte pour synchroniser</p>
+      </div>
+      <div class="cta-card">
+        <div class="cc-icon" style="background:rgba(245,158,11,.2)">⏱</div>
+        <h4>+15 ans d'expérience</h4>
+        <p>Application mature, stable et régulièrement améliorée</p>
+      </div>
+      <div class="cta-card">
+        <div class="cc-icon" style="background:rgba(124,58,237,.2)">🐦</div>
+        <h4>Toutes espèces</h4>
+        <p>Canaris, perruches, inséparables, perroquets et bien plus</p>
+      </div>
+    </div>
+
+    <div class="fade-up delay-3">
+      <a class="cta-btn" href="#">Utilisez Birds Evolution dès maintenant</a>
+    </div>
+    <p class="cta-compat fade-up delay-4">Compatible Windows · Mac · Linux · Android · iOS</p>
+    <p class="cta-version fade-up delay-5">Version 4.2+ · Fiche produit générée en 2026</p>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     JAVASCRIPT
+───────────────────────────────────────── -->
+<script>
+// ── Nav dots: scroll-to + active state ──
+const dots = document.querySelectorAll('#nav-dots .dot');
+const sections = [];
+
+dots.forEach(dot => {
+  const id = dot.dataset.target;
+  const sec = document.getElementById(id);
+  if (sec) sections.push({ dot, sec });
+
+  dot.addEventListener('click', () => {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Update active dot based on scroll position
+function updateDots() {
+  const mid = window.scrollY + window.innerHeight / 2;
+  let active = sections[0];
+
+  sections.forEach(({ dot, sec }) => {
+    const top = sec.offsetTop;
+    const bot = top + sec.offsetHeight;
+    if (mid >= top && mid < bot) active = { dot, sec };
+    dot.classList.remove('active');
+  });
+
+  if (active) active.dot.classList.add('active');
+
+  // Adjust dot color for dark/light sections
+  sections.forEach(({ dot, sec }) => {
+    const bg = getComputedStyle(sec).backgroundColor;
+    const isDark = bg.includes('15, 39, 80') || bg.includes('10, 32, 68')
+      || bg.includes('8, 30, 58') || bg.includes('11, 32, 64')
+      || bg.includes('13, 42, 88') || bg.includes('11, 30, 69')
+      || sec.id === 'cta' || sec.id === 'dashboard' || sec.id === 'elevage'
+      || sec.id === 'budget' || sec.id === 'avance' || sec.id === 'hero';
+    dot.style.setProperty('--dot-idle', isDark
+      ? 'rgba(255,255,255,.35)' : 'rgba(15,39,80,.25)');
+  });
+}
+
+window.addEventListener('scroll', updateDots, { passive: true });
+updateDots();
+
+// ── Scroll fade-in animations ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      // Don't unobserve – keep 'in' class
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+
+<!-- ── Lightbox ── -->
+<div id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Image en plein écran">
+  <button id="lightbox-close" aria-label="Fermer">&#x2715;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+(function () {
+  const overlay = document.getElementById('lightbox-overlay');
+  const lbImg   = document.getElementById('lightbox-img');
+  const btnClose = document.getElementById('lightbox-close');
+
+  function openLightbox(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  // Clic sur toutes les images .screen
+  document.querySelectorAll('img.screen').forEach(function (img) {
+    img.addEventListener('click', function () {
+      openLightbox(img.src, img.alt);
+    });
+  });
+
+  // Fermeture via bouton ×
+  btnClose.addEventListener('click', closeLightbox);
+
+  // Fermeture via clic sur le fond
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  // Fermeture via Échap
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeLightbox();
+  });
+})();
+</script>
+
+</body>
+</html>
